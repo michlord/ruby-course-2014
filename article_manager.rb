@@ -28,7 +28,7 @@ class ArticleManager
     @articles.max_by { |x| x.votes }
   end
   def include?(pattern)
-    @articles.find_all { |x| x.include?(pattern) }
+    @articles.find_all { |x| x.include?(pattern) }.empty? == false
   end
   def authors
     @articles.map { |x| x.author }.uniq
