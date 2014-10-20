@@ -57,6 +57,7 @@ class TestArticle < Test::Unit::TestCase
     assert_equal(".", @article_1.shortened_to(1))
     assert_equal("...", @article_1.shortened_to(3))
     assert_equal("P...", @article_1.shortened_to(4))
+    assert_equal("", @article_1.shortened_to(-5))
   end
   def test_include?
     assert(@article_1.include?("world"))

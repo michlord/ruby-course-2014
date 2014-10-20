@@ -26,8 +26,6 @@ class Article
       out = ""
       limit.times {out << "."}
       out
-    elsif limit < 0
-      ""
     else
       @content[0...limit - 3] + '...'
     end
