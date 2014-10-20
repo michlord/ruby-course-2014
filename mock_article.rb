@@ -19,31 +19,38 @@ class MockArticle < Article
   "make","man","many","may","me","men",
   "might","more","most","Mr","must","my",
   "name","never","new","next","no","not"]
+
   def self.random_word
     WORD_LIST[rand(0..WORD_LIST.length - 1)]
   end
+
   def random_number
     rand(0..100)
   end
+
   def generate_author
     MockArticle.random_word.capitalize + " " + 
       MockArticle.random_word.capitalize
   end
+
   def generate_title
     title = MockArticle.random_word.capitalize
     rand(0..4).times { title += " " + MockArticle.random_word }
     title
   end
+
   def generate_sentence
     sentence = MockArticle.random_word.capitalize
     rand(4..9).times { sentence += " " + MockArticle.random_word }
     sentence + "."
   end
+
   def generate_content
     content = generate_sentence
     rand(0..4).times { content += " " + generate_sentence}
     content
   end
+
   def initialize
     super(generate_title, generate_content, generate_author)
     @likes = random_number
@@ -52,3 +59,4 @@ class MockArticle < Article
   
   private_class_method :random_word
 end
+
