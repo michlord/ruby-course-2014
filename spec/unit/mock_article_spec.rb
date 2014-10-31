@@ -10,6 +10,7 @@ class TestMockArticle < Test::Unit::TestCase
       assert(MockArticle.random_word.is_a?(String))
     end
   end
+
   def test_random_number
     m = MockArticle.new()
     10.times do
@@ -18,6 +19,7 @@ class TestMockArticle < Test::Unit::TestCase
       assert(number <= 100)
     end
   end
+
   def test_generate_author
     m = MockArticle.new()
     10.times do
@@ -28,6 +30,7 @@ class TestMockArticle < Test::Unit::TestCase
       assert_equal(last.capitalize, last)
     end
   end
+
   def test_generate_title
     m = MockArticle.new()
     20.times do
@@ -38,6 +41,7 @@ class TestMockArticle < Test::Unit::TestCase
       assert_equal(words[0].capitalize, words[0])
     end
   end
+
   def test_generate_sentence
     m = MockArticle.new()
     20.times do
@@ -48,13 +52,16 @@ class TestMockArticle < Test::Unit::TestCase
       assert_equal(words[0].capitalize, words[0])
     end
   end
+
   def test_generate_content
     m = MockArticle.new()
     20.times do
       content = m.generate_content
-      # There must be a space after each sentence.
+      # There must be a space after each period
+      # except the last one.
       sentences = content.split(". ")
-      # Make sure there are no extra spaces.
+      # Make sure there are no extra spaces
+      # around a sentence.
       sentences.each do |s|
         assert_equal(s.strip, s)
       end
