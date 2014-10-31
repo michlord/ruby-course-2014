@@ -1,7 +1,7 @@
 require 'fileutils'
 
 class Article
-  attr_reader :author, :title, :content, :likes, :dislikes
+  attr_accessor :author, :title, :content, :likes, :dislikes
 end
 
 class ArticleFilesystem
@@ -13,6 +13,16 @@ class ArticleFilesystem
     open(ARTICLES_FOLDER + '/' + file_name, 'w') do |f|
       f << article.author << '|' << article.title << '|' << 
         article.content << '|' << article.likes << '|' << article.dislikes
+    end
+  end
+  
+  def self.load(path)
+    File.open(path, 'r') do |f|
+      author, title, content, likes, dislikes = f.readline.split('|')      
+      art = Article.new(title, content, author)
+      art.likes = likes.to_i
+      art.dislikes = dislikes.to_i
+      return art
     end
   end
 end
