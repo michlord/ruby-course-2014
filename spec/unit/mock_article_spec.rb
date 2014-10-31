@@ -4,26 +4,28 @@ class MockArticle
   public_class_method  :random_word
 end
 
-class TestMockArticle < Test::Unit::TestCase
+class MockArticleSpec < Test::Unit::TestCase
+  def setup
+    @mock_article = MockArticle.new
+  end
+
   def test_random_word
-    10.times do
-      assert(MockArticle.random_word.is_a?(String))
-    end
+    random_words = []
+    10.times { random_words << MockArticle.random_word }
+    assert(random_words.all? { |word| MockArticle::WORD_LIST.include?(word) })
   end
 
   def test_random_number
-    m = MockArticle.new()
     10.times do
-      number = m.random_number
+      number = @mock_article.random_number
       assert(number >= 0)
       assert(number <= 100)
     end
   end
 
   def test_generate_author
-    m = MockArticle.new()
     10.times do
-      author = m.generate_author.split(/\W+/)
+      author = @mock_article.generate_author.split(/\W+/)
       assert_equal(2, author.length)
       first, last = author
       assert_equal(first.capitalize, first)
@@ -32,9 +34,8 @@ class TestMockArticle < Test::Unit::TestCase
   end
 
   def test_generate_title
-    m = MockArticle.new()
     20.times do
-      title = m.generate_title
+      title = @mock_article.generate_title
       words = title.split(/\W+/)
       assert(words.length >= 1)
       assert(words.length <= 5)
@@ -43,9 +44,8 @@ class TestMockArticle < Test::Unit::TestCase
   end
 
   def test_generate_sentence
-    m = MockArticle.new()
     20.times do
-      sentence = m.generate_sentence
+      sentence = @mock_article.generate_sentence
       words = sentence.split(/\W+/)
       assert(words.length >= 5)
       assert(words.length <= 10)
@@ -54,9 +54,8 @@ class TestMockArticle < Test::Unit::TestCase
   end
 
   def test_generate_content
-    m = MockArticle.new()
     20.times do
-      content = m.generate_content
+      content = @mock_article.generate_content
       # There must be a space after each period
       # except the last one.
       sentences = content.split(". ")
