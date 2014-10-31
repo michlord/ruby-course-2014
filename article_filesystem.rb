@@ -1,7 +1,13 @@
 require 'fileutils'
+require_relative 'article'
+require_relative 'article_manager'
 
 class Article
   attr_accessor :author, :title, :content, :likes, :dislikes
+end
+
+class ArticleManager
+  attr_accessor :articles
 end
 
 class ArticleFilesystem
@@ -24,5 +30,13 @@ class ArticleFilesystem
       art.dislikes = dislikes.to_i
       return art
     end
+  end
+  
+  def self.load_articles(path)
+    article_manager = ArticleManager.new
+    Dir[path + '/*'].each do |f|
+      article_manager.articles << ArticleFilesystem.load(f)
+    end
+    article_manager
   end
 end
