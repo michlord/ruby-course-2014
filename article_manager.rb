@@ -34,7 +34,7 @@ class ArticleManager
   end
 
   def include?(pattern)
-    @articles.find_all { |art| art.include?(pattern) }.empty? == false
+    @articles.any? { |art| art.include?(pattern) }
   end
 
   def authors

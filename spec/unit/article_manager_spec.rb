@@ -1,7 +1,7 @@
 require_relative '../../article'
 require_relative '../../article_manager'
 
-class TestArticleManager < Test::Unit::TestCase
+class ArticleManagerSpec < Test::Unit::TestCase
   def setup
     @article_1 = Article.new("This feels dirty",
       "Play it on a mac and the world would collapse.",
@@ -54,18 +54,8 @@ class TestArticleManager < Test::Unit::TestCase
   end
 
   def test_include?
-    assert(@article_manager.include?("need"))
-    assert(@article_manager.include?("collapse"))
-    assert(@article_manager.include?("into"))
-    assert(@article_manager.include?("it"))
-    assert(@article_manager.include?("there"))
-    assert(@article_manager.include?("."))
-    
-    assert(@article_manager.include?("Boroth") == false)
-    assert(@article_manager.include?("...") == false)
-    assert(@article_manager.include?("Mike") == false)
-    assert(@article_manager.include?("_h") == false)
-    assert(@article_manager.include?("!") == false)
+    assert(@article_manager.include?("need"))    
+    assert(!@article_manager.include?("Boroth"))
   end
 
   def test_authors
