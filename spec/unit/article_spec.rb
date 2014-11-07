@@ -61,4 +61,10 @@ class ArticleSpec < Test::Unit::TestCase
       @article.distinct_words
     )
   end
+  
+  def test_created_stamp
+    art = Article.new("Some title", "Some content", "Some author")
+    art.created_at = Time.new(2000,5,2)
+    assert_equal("Tuesday, May 2, 2000", art.created_stamp)
+  end
 end

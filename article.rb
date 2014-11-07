@@ -1,3 +1,5 @@
+require 'stamp'
+
 class Article
   def initialize(title, content, author = '')
     @title, @content, @author = title, content, author
@@ -43,5 +45,9 @@ class Article
 
   def distinct_words
     words.uniq
+  end
+  
+  def created_stamp
+    @created_at.stamp("Monday, May 1, 2000")
   end
 end
