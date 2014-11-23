@@ -1,5 +1,6 @@
 require_relative '../../article'
 require_relative '../../article_manager'
+require_relative '../../article_internet'
 
 class ArticleManagerSpec < Test::Unit::TestCase
   def setup
@@ -90,5 +91,11 @@ class ArticleManagerSpec < Test::Unit::TestCase
     manager = ArticleManager.new
     manager.load_articles_from_internet
     assert(!manager.articles.empty?)
+  end
+  
+  def test_load_articles_from_internet_and_save
+    ArticleInternet.load.each do |art|
+      ArticleFilesystem.save art
+    end
   end
 end
