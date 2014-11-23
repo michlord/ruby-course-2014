@@ -1,5 +1,6 @@
 require_relative 'article'
 require_relative 'article_filesystem'
+require_relative 'article_internet'
 
 class Article
   attr_reader :author
@@ -59,6 +60,10 @@ class ArticleManager
     Dir[path + '/*'].each do |f|
       @articles << ArticleFilesystem.load(f)
     end
+  end
+  
+  def load_articles_from_internet()
+    @articles = ArticleInternet.load
   end
 end
 

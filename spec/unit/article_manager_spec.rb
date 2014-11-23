@@ -85,4 +85,10 @@ class ArticleManagerSpec < Test::Unit::TestCase
     manager.load_articles("articles_store")
     assert(!manager.articles.empty?)
   end
+  
+  def test_load_articles_from_internet
+    manager = ArticleManager.new
+    manager.load_articles_from_internet
+    assert(!manager.articles.empty?)
+  end
 end
