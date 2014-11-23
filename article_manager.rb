@@ -1,4 +1,5 @@
 require_relative 'article'
+require_relative 'article_filesystem'
 
 class Article
   attr_reader :author
@@ -51,6 +52,13 @@ class ArticleManager
 
   def to_s
     @articles.map.with_index { |art, i| i.to_s + ' ' + art.to_s }.join("\n")
+  end
+  
+  def load_articles(path)
+    @articles = []
+    Dir[path + '/*'].each do |f|
+      @articles << ArticleFilesystem.load(f)
+    end
   end
 end
 

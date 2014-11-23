@@ -31,12 +31,4 @@ class ArticleFilesystem
       return art
     end
   end
-  
-  def self.load_articles(path)
-    article_manager = ArticleManager.new
-    Dir[path + '/*'].each do |f|
-      article_manager.articles << ArticleFilesystem.load(f)
-    end
-    article_manager
-  end
 end

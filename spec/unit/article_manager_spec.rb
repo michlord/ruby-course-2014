@@ -79,4 +79,10 @@ class ArticleManagerSpec < Test::Unit::TestCase
     
     assert_equal(str, @article_manager.to_s)
   end
+  
+  def test_load_articles
+    manager = ArticleManager.new
+    manager.load_articles("articles_store")
+    assert(!manager.articles.empty?)
+  end
 end
